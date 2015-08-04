@@ -7,9 +7,8 @@ public class TextController : MonoBehaviour {
 	public Text text;
 	private enum States {
 		cell, cell_0, cell_1, cell_2, mirror, mirror_0, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, 
-		corridor_0, corridor_0a, corridor_0b, corridor_0c, stairs_0, stairs_1, stairs_2, closet_door, 
-		floor, corridor_1, corridor_1a, corridor_1b, in_closet, corridor_2, corridor_2a, corridor_3, 
-		corridor_3a, courtyard, endgame, endgame_0, endgame_1, endgame_2, endgame_3, endgame_4, endgame_5
+		corridor_0, corridor_0a, corridor_0b, corridor_0c, stairs_0, stairs_1, closet_door, 
+		floor, corridor_1, corridor_1a, corridor_2, courtyard, endgame, endgame_0, endgame_1, endgame_2, endgame_3, endgame_4, endgame_5, endgame_6
 		};
 	private States myState;
 
@@ -34,21 +33,13 @@ public class TextController : MonoBehaviour {
 		else if (myState == States.lock_1) 		{lock_1();}
 		else if (myState == States.corridor_0) 	{corridor_0();}
 		else if (myState == States.corridor_0a)	{corridor_0a();}
-		else if (myState == States.corridor_0b)	{corridor_0b();}
-		else if (myState == States.corridor_0c)	{corridor_0c();}
 		else if (myState == States.stairs_0) 	{stairs_0();}
 		else if (myState == States.stairs_1) 	{stairs_1();}
-		else if (myState == States.stairs_2) 	{stairs_2();}
 		else if (myState == States.closet_door) {closet_door();}
 		else if (myState == States.floor)	 	{floor();}
-		else if (myState == States.corridor_1) 	{corridor_1();}
+		else if (myState == States.corridor_1)	{corridor_1();}
 		else if (myState == States.corridor_1a)	{corridor_1a();}
-		else if (myState == States.corridor_1b)	{corridor_1b();}
-		else if (myState == States.in_closet)	{in_closet();}
 		else if (myState == States.corridor_2)	{corridor_2();}
-		else if (myState == States.corridor_2a)	{corridor_2a();}
-		else if (myState == States.corridor_3)	{corridor_3();}
-		else if (myState == States.corridor_3a)	{corridor_3a();}
 		else if (myState == States.courtyard)	{courtyard();}
 		else if (myState == States.endgame) 	{endgame();}
 		else if (myState == States.endgame_0) 	{endgame_0();}
@@ -57,6 +48,7 @@ public class TextController : MonoBehaviour {
 		else if (myState == States.endgame_3) 	{endgame_3();}
 		else if (myState == States.endgame_4) 	{endgame_4();}
 		else if (myState == States.endgame_5) 	{endgame_5();}
+		else if (myState == States.endgame_6) 	{endgame_6();}
 	}
 	
 	void cell() {
@@ -146,12 +138,12 @@ public class TextController : MonoBehaviour {
 		if 		(Input.GetKeyDown(KeyCode.U))	{myState = States.corridor_0;}
 		else if (Input.GetKeyDown(KeyCode.T)) 	{myState = States.endgame_0;}
 	}
-	
+
 	void corridor_0() {
 		text.text = "You hear a Klick-CLUNK as you turn the key. You slowly push on the cell door it glides opens " +
 					"to an empty corridor. As you peek around the corner, you don't see ANY guards?! So you..." +
 					"Run! You're FREE...well...so you thought. You're just in the coridor. You see something on the " +
-					"floor, stairs leading up to ???, and a closed closet door.\n\n"; +
+					"floor, stairs leading up to ???, and a closed closet door.\n\n" +
 					"Press F to look at floor, S to walk upstairs, C to open closed door, or Y to yell for help.";
 		if 		(Input.GetKeyDown(KeyCode.F)) 	{myState = States.floor;}
 		else if (Input.GetKeyDown(KeyCode.S)) 	{myState = States.stairs_0;}
@@ -159,18 +151,83 @@ public class TextController : MonoBehaviour {
 		else if (Input.GetKeyDown(KeyCode.Y)) 	{myState = States.endgame;}
 	}
 	
-	void floor() {
+	void corridor_0a() {
+		text.text = "You could do several things - agian. Maybe stare at floor again, do a Ninja kick to the locked door, " +
+					"or down stairs to possible freedom. Either way, you want out - NOW!!!\n\n" +
+					"Press F to look at the floor again, K to kick in the locked door, or S to head downstairs.";
+		if 		(Input.GetKeyDown (KeyCode.F))	{myState = States.floor;}
+		else if (Input.GetKeyDown (KeyCode.K))	{myState = States.endgame_2;}
+		else if (Input.GetKeyDown (KeyCode.S))	{myState = States.stairs_0;}
+	}
 	
+	void floor() {
+		text.text = "You look at the floor and notice a hairpin with clump of hair still in it. Wonder what happen " +
+					"the hairs owner? Looks like the hair was ripped of their head, hairpin and all..." +
+					"You quickly try to think what to do with this hairpin.\n\n" +
+					"Press P to Pickup hairpin and try to unlock the door, B to brake the hairpin out of rage, or R to return to corridor.";
+		if 		(Input.GetKeyDown(KeyCode.P)) 	{myState = States.closet_door;}
+		else if (Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_0a;}
+		else if (Input.GetKeyDown(KeyCode.B)) 	{myState = States.endgame_3;}
 	}
 	
 	void stairs_0() {
+		text.text = "You tip toe up the stairs to the lower level, but notice a guard watching a good game of " +
+					"Seattle Seahawks by another cell door. Occasionally you here him cheer and scream, 'GO! GO! GO! - TOUCHDOWN!!!\n\n" +
+					"Press C Cheer with him, or R to return to corridor.";
+		if 		(Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_0a;}
+		else if (Input.GetKeyDown(KeyCode.C)) 	{myState = States.endgame_1;}
+	}
+	
+	void stairs_1() {
 	
 	}
 	
 	void closet_door() {
-	
+		text.text = "As you twist the hairpin into something that looks like a mangled key, you decide to try to slowly " +
+					"insert it into the locked closet door. To your surprise, the clank of an unlocked door briefly echoed throughout " +
+					"the corridor. You freeze, slowly open the door and see a Seahawks jersey and a janitor jumpsuit.\n\n" +
+					"Press S to put on Seahawk Jersey and return to corridor, or J to put on the Janitor jumpsuit and return to corridor.";
+		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.corridor_1;}
+		else if (Input.GetKeyDown(KeyCode.J)) 	{myState = States.corridor_2;}
 	}
 	
+	void corridor_1() {
+		text.text = "After putting on the Seahawks jersey, you start heading downstairs. As you creep down the stairs, you " +
+					"hear a guard cheering for the Seahawks! Maybe he'll think that you're a guard coming to cheer with him? " +
+					"At halftime you might be able to slip out to FREEDOM?\n\n" +
+					"Press T to trick the guard into opening the locked door, or creep back into closet and try Janitor jumpsuit.";
+		if 		(Input.GetKeyDown(KeyCode.T)) 	{myState = States.endgame_4;}
+		else if (Input.GetKeyDown(KeyCode.J)) 	{myState = States.corridor_1a;}
+	}
+	
+	void corridor_1a() {
+		text.text = "You creep back into the closet again. As you get in, you quietly put on the Janitor jumpsuit. " +
+					"You feel comfortable and natural in the Acme Janitor Service jumpsute. You think you could possibly " +
+					"see if they have any job openings when you escape? Hmmmm... Either way, you have some options.\n\n" +
+					"Press S to head downstairs or R to Return to corridor";
+		if 		(Input.GetKeyDown(KeyCode.S)) 	{myState = States.endgame_5;}
+		else if (Input.GetKeyDown(KeyCode.R)) 	{myState = States.corridor_2;}
+	}
+	
+	void corridor_2() {
+		text.text = "As you return to the corridor, you hear a guard yelling and cursing down the stairs. As you start to " +
+					"panic, you hear him yell at you! In fear, you freeze. He yells to you, 'I've spilt my beverage all over myself " +
+					"bring the mop bucket and cleanup this mess! While you're cleaning, I'll change out in my uniform.' He opens the " +
+					"last locked cell door to his control room. He grab mop and run into the control room. He slammed the cell door " +
+					"shut and headed out. Once in the room, you notice a door leading to an open courtyard.\n\n" +
+					"Press C to bolt out into the Courtyard or M to start Mopping up the mess.";
+		if 		(Input.GetKeyDown(KeyCode.C)) 	{myState = States.endgame_6;}
+		else if (Input.GetKeyDown(KeyCode.M)) 	{myState = States.courtyard;}
+	}
+	
+	void courtyard() {
+		text.text = "As you stand there in the guards watch cell with a dry mop, you notice you don't have a mop bucket. As you look " +
+					"outside, the guard opens the door and said, 'Your mop bucket is outside and ready to be filled with soapy water.' " +
+					"He opens the door as you walk out. You hear the door shut as you reach for the bucket. You then look up and see that " +
+					"the front gate to the prison is open because it's being serviced. What do you do?!?!?!\n\n" +
+					"YOU RUN, that's what you do!!! YOU'RE FREE!!!! You've won!!!";
+	}
+
 	void endgame() {
 		text.text = "As you start yelling, you hear the rush of the guards from all over the place. " +
 					"The next thing you know, you're getting maced with pepper spary and you wake up in " +
@@ -183,6 +240,62 @@ public class TextController : MonoBehaviour {
 	void endgame_0() {
 		text.text = "Wait! What..?!? Why would through the key out of the cell without " +
 					"trying it out on the locked cell door? You need to work on your anger issues.\n\n" +
+					"GAME OVER - You sit there day after day, month after month, wondering why you did that.\n\n" +
+					"To play again, press P.";
+		if (Input.GetKeyDown(KeyCode.P))		{myState = States.cell;}
+	}
+	
+	void endgame_1() {
+		text.text = "As you start CHEERING for the Hawks, you hear the rush of the guards from all over the place. " +
+					"The next thing you know, you're getting maced with pepper spary and you wake up in " +
+					"dark cell with padding several hours later.\n\n" +
+					"GAME OVER - You're in solitary confinement for 6 months.\n\n" +
+					"To play again, press P.";
+		if (Input.GetKeyDown(KeyCode.P))		{myState = States.cell;}
+	}
+	
+	void endgame_2() {
+		text.text = "You get into your proper Ninja stance to perform the perfect kick to the door... " +
+					"BOOM! You kick it with the precision of an unseasoned white belt. Sadly, you lack the Ninja skills " +
+					"to open the door with true inteligence.\n\n" +
+					"GAME OVER - You sit there day after day, month after month, wondering why you did that.\n\n" +
+					"To play again, press P.";
+		if (Input.GetKeyDown(KeyCode.P))		{myState = States.cell;}
+	}
+	
+	void endgame_3() {
+		text.text = "Out of pure rage, you use all your muscle and snap the hairpin in half. Well...at least " +
+					"you tried to. Looks like the hairpin is stronger than you! Through the grunts of trying to" +
+					"break the hairpin, the guards heard and rushed in and tackled you.\n\n" +
+					"GAME OVER - You sit there day after day, month after month, wondering why you did that.\n\n" +
+					"To play again, press P.";
+		if (Input.GetKeyDown(KeyCode.P))		{myState = States.cell;}
+	}
+	
+	void endgame_4() {
+		text.text = "You start cheering for the Seahawks and the guard looks at you with a confused look... " +
+					"He then bacame aware that someone was wearing HIS Seahawk jersey that was hung in the closet to dry " +
+					"from a spilt beer... The next thing you know, you're getting maced with pepper spary and you wake up in." +
+					"dark cell with padding several hours later." +
+					"GAME OVER - You sit there day after day, month after month, wondering why you did that.\n\n" +
+					"To play again, press P.";
+		if (Input.GetKeyDown(KeyCode.P))		{myState = States.cell;}
+	}
+	
+	void endgame_5() {
+		text.text = "As you head downstairs, the guard looks at you with a confused look then surprise... " +
+					"The next thing you know, you're getting maced with pepper spary and you wake up in." +
+					"dark cell with padding several hours later." +
+					"GAME OVER - You sit there day after day, month after month, wondering why you did that.\n\n" +
+					"To play again, press P.";
+		if (Input.GetKeyDown(KeyCode.P))		{myState = States.cell;}
+	}
+	
+	void endgame_6() {
+		text.text = "As you mop up the mess, you realize that this would be a great references for my potential Janitor job " +
+					"interview. As you daydream of all the wonders of the job, the guard returns and noticed that your not " +
+					"Billy, the well known prison janitor. His lucky mop pale was drying in the sun out in the courtyard! " +
+					"The next thing you know, you're getting maced with pepper spary and you wake up in a dark cell with padding several hours later." +
 					"GAME OVER - You sit there day after day, month after month, wondering why you did that.\n\n" +
 					"To play again, press P.";
 		if (Input.GetKeyDown(KeyCode.P))		{myState = States.cell;}
